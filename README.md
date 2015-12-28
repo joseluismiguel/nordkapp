@@ -1,2 +1,0 @@
-# nordkapp
-plan de viaje
