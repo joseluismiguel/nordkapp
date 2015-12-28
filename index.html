@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width", initial-scale=1.0>
+        <meta http-equiv="content-type" content="text/html"; charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/app.css">
+        <title>Viaje a NordKapp</title>
+        <script src="js/libs/angular.min.js"></script>
+        <script src="js/libs/angular-locale_es-es.js"></script>
+        <script src="/js/app.js"></script>
+    </head>
+    <body ng-app="app">
+        
+  <!--    Div con el título-->  
+        <div class="conteiner">
+            <div class="jumbotron">
+                <img src="/images/nordkapp.svg" class="img-responsive img-circle" width=100 align=left hspace=20>
+                <h1 align=center>NordKapp en moto 2016 <small>( Plan de viaje )</small></h1>
+                
+            </div>
+        
+        </div>
+<!--    Div con el controlador appCtrl-->
+        
+        <div class="container" ng-controller="appCtrl">
+            <h1>Preparativos del viaje</h1>
+            <span>{{restantes()}} de {{tareas.length}} tareas pendientes </span>
+            
+            [<a class="text-danger" href="" ng-click="eliminar()">eliminar</a>]
+            <ul>
+                <li ng-repeat="tarea in tareas">
+                    <input type="checkbox" ng-model="tarea.hecho">
+                    <span class="hecho-{{tarea.hecho}}"> {{tarea.texto}} </span>
+                </li>
+            </ul>
+            <form ng-submit="agregarTarea()">
+                <input type="text" class="form-contrl" size="30" placeholder="Agregar nueva tarea" ng-model="textoNuevaTarea">
+                <button class="btn btn-primary" type="submit">Agregar</button>
+            </form>
+        </div>
+        
+        
+<!--    Div con el controlador ControladorFiltros-->
+        
+        <div  class="container" ng-controller="ControladorFiltros">
+            <h1>Etapas previstas (día a día)</h1>
+            
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                  <input type="text" class="form-control" placeholder="Buscar" ng-model="buscar">
+                </div>
+              </div>
+              <div class="panel-body">
+                <table class="table table-striped">
+                  <thead>
+                  <tr>
+                    <th>
+                      <a href="" ng-click="ordenarPor('nombre')">
+                        Día
+                      </a>
+                      <span class="caret" style="cursor: pointer" ng-click="ordenarPor('-nombre')"></span>
+                    </th>
+                    <th>Salida</th>
+                    <th>Llegada</th>
+                    <th>Notas</th>
+                    <th>Kms</th>
+                    <th>Alojamiento</th>
+                    <th>Peaje</th>
+                    <th>Gasolina</th>
+                    <th>Dormir</th>
+                    <th>Comer</th>
+                    <th>Otros</th>
+                    <th>Total</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr ng-repeat="etapa in etapas | orderBy:ordenSeleccionado | filter:buscar">
+                    <td>{{etapa.dia | date: shortDate}}</td>
+                    <td>{{etapa.salida | uppercase}}</td>
+                    <td>{{etapa.llegada | uppercase}}</td>
+                    <td>{{etapa.notas}}</td>
+                    <td>{{etapa.kms | number:0}}</td>
+                    <td>{{etapa.alojamiento}}</td>
+                    <td>{{etapa.peaje | currency}}</td>
+                    <td>{{etapa.gasolina | currency}}</td>
+                    <td>{{etapa.dormir | currency}}</td>
+                    <td>{{etapa.comer | currency}}</td>
+                    <td>{{etapa.otros | currency}}</td>
+                    <td>{{etapa.total | currency}}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+        </div>
+    </body>
+    
+
+</html>
