@@ -5,7 +5,7 @@
 var app = angular.module('app',[]);
 
 app.controller('appCtrl', function($scope){
-    $scope.tareas = [{texto: 'Definirla ruta seguir', hecho: false},
+    $scope.tareas = [{texto: 'Definir la ruta a seguir', hecho: false},
                      {texto: 'Preparar la moto para llevar bolsas sobre las maletas', hecho: false}];
     
     $scope.agregarTarea = function(){
